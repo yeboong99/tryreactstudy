@@ -47,25 +47,45 @@
 }
 
 export default function App() {
-  const primitiveString = "Hello World!";
-  const primitiveBoolean = false;
-  const primitiveUndefined = undefined;
-  const primitiveNull = null;
-  const primitiveSymbol = Symbol("mySymbol");
-  const primitiveBigInt = 9007199254740991n;
+  const referenceArray = [1, 2, 3, 4, 5];
+  const referenceObject = { name: "Jhon", age: 30 };
+  const referenceFunction = () => "함수의 리턴 값";
+  const referenceDate = new Date();
 
-  console.log("hello");
+  {
+    /* 정규식 */
+  }
+  const referenceRegExp = /react/i;
+
+  const referenceMap = new Map([
+    ["key1", "value1"],
+    ["key2", "value2"],
+  ]);
+  const referenceSet = new Set([1, 2, 3, 4]);
+
   return (
     <>
-      <h2>기본 자료형 출력</h2>
-      <p>문자열: {primitiveString} </p>
-      <p>숫자: {primitiveBigInt} </p>
-      {/* 논리형 값은 렌더링 가능한 값으로 취급하지 않아서 문자열로 변경해서 출력해줘야 함. */}
-      <p>논리형: {primitiveBoolean.toString()} </p>
-      {/* undefined, null, symbol도 마찬가지이지만 toString()은 지원되지 않음. 대신 JS 내장함수인 String()사용. */}
-      <p>undefined: {String(primitiveUndefined)} </p>
-      <p>null: {String(primitiveNull)} </p>
-      <p>symbol: {String(primitiveSymbol)} </p>
+      <h2>참조 자료형 출력</h2>
+      <p>배열: {referenceArray} </p>
+
+      {/* 객체를 바로 렌더링하려고 하면 리액트에서 에러를 냄. JSON 문자열 형태로 바꾸면 렌더링 가능 */}
+      <p>객체: {JSON.stringify(referenceObject)} </p>
+
+      {/* 함수는 래퍼 객체가 존재하기 때문에 toString()으로 렌더링 시킬 수 있음 */}
+      <p>함수: {referenceFunction.toString()} </p>
+
+      {/* Date도 래퍼 객체가 존재해서 toString() */}
+      <p>Date: {referenceDate.toString()} </p>
+
+      {/* 정규식도 마찬가지. toString()으로 렌더링 가능 */}
+      <p>정규식: {referenceRegExp.toString()} </p>
+
+      {/* 맵의 경우 그냥 referenceMap자체만 렌더링하면 보이긴 하지만 리액트 에러가 발생하고 요소 내용이 한번에 쭉 나열되어서 출력됨.
+      그래서  Array내장객체의 from()메서드를 이용해 배열로 변환하고, 예쁘게 보기 위해 JSON문자열로 한번 더 변환한 후에 렌더링 */}
+      <p>Map: {JSON.stringify(Array.from(referenceMap))} </p>
+
+      {/* 셋도 마찬가지 */}
+      <p>Set: {JSON.stringify(Array.from(referenceSet))} </p>
     </>
   );
 }
