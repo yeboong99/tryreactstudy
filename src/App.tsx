@@ -46,15 +46,26 @@
   */
 }
 
-import Footer from "./components/Footer.tsx";
-import Header from "./components/Header.tsx";
-import Main from "./components/Main.tsx";
 export default function App() {
+  const primitiveString = "Hello World!";
+  const primitiveBoolean = false;
+  const primitiveUndefined = undefined;
+  const primitiveNull = null;
+  const primitiveSymbol = Symbol("mySymbol");
+  const primitiveBigInt = 9007199254740991n;
+
+  console.log("hello");
   return (
     <>
-      <Header />
-      <Main />
-      <Footer />
+      <h2>기본 자료형 출력</h2>
+      <p>문자열: {primitiveString} </p>
+      <p>숫자: {primitiveBigInt} </p>
+      {/* 논리형 값은 렌더링 가능한 값으로 취급하지 않아서 문자열로 변경해서 출력해줘야 함. */}
+      <p>논리형: {primitiveBoolean.toString()} </p>
+      {/* undefined, null, symbol도 마찬가지이지만 toString()은 지원되지 않음. 대신 JS 내장함수인 String()사용. */}
+      <p>undefined: {String(primitiveUndefined)} </p>
+      <p>null: {String(primitiveNull)} </p>
+      <p>symbol: {String(primitiveSymbol)} </p>
     </>
   );
 }
