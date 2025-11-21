@@ -1,28 +1,15 @@
-{
-  /**
-  children으로 데이터 전달하기
+// UserProfile은 name, age, isAdmin을 받는다
+// 받는 props에 따라 화면에 다르게 출력되어야 한다. 사용자가 관리자라면 "관리자 계정", 사용자가 일반 사용자라면 "일반 사용자"라고 표시되어야 한다.
+// App 컴포넌트에서 UserProfile컴포넌트를 두 번 렌더링해라. 한번은 관리자로, 한 번은 일반사용자로.
 
-  자식 컴포넌트에게 속성 말고 태그 내 컨텐츠를 이용해 데이터를 전달할 수 있다.
-  HTML의 셀프클로징 태그가 아닌, 컨텐츠를 담아서 보낼 때 데이터를 받을 수 있도록 만들어둔 타입을 children이라고 한다.
-
-
-  */
-}
-
-{
-  /* <Button text="Login" />
-      <Button text="Logout" /> */
-}
-
-import Button from "./components/ui/Button.tsx";
+import UserProfile from "./components/UserProfile";
 
 export default function App() {
   return (
     <>
-      <Button>Login</Button>
-      <Button>
-        <p>abc</p>
-      </Button>
+      <h1>사용자 목록</h1>
+      <UserProfile name="홍길동" age={30} isAdmin={true} />
+      <UserProfile name="홍길은" age={20} isAdmin={false} />
     </>
   );
 }
