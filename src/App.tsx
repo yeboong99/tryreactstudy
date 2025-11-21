@@ -8,8 +8,21 @@ export default function App() {
   return (
     <>
       <h1>사용자 목록</h1>
-      <UserProfile name="홍길동" age={30} isAdmin={true} />
-      <UserProfile name="홍길은" age={20} isAdmin={false} />
+      <UserProfile>
+        {{
+          name: "홍길동",
+          age: 30,
+          isAdmin: true,
+        }}
+      </UserProfile>
+
+      <UserProfile>
+        {{
+          name: "홍길은",
+          age: 25,
+          isAdmin: false,
+        }}
+      </UserProfile>
     </>
   );
 }
