@@ -1,23 +1,28 @@
-import User from "./components/User";
-import User2 from "./components/User2";
+{
+  /**
+  children으로 데이터 전달하기
 
-export default function App() {
-  const userObj = {
-    name: "Jack",
-    age: 20,
-    gender: "male",
-  };
+  자식 컴포넌트에게 속성 말고 태그 내 컨텐츠를 이용해 데이터를 전달할 수 있다.
+  HTML의 셀프클로징 태그가 아닌, 컨텐츠를 담아서 보낼 때 데이터를 받을 수 있도록 만들어둔 타입을 children이라고 한다.
 
-  return (
-    <>
-      <User userObj={userObj} />
-      <User2 {...userObj} />
-      <User2 name={userObj.name} age={userObj.age} gender={userObj.gender} />
-    </>
-  );
+
+  */
 }
 
 {
-  /* 14라인에 전개 연산자 (...)를 이용해서 15라인과 똑같은 형태의 데이터 전달을 할 수 있다.
-  전개 연산자는 스프레드 연산자라고도 불린다. */
+  /* <Button text="Login" />
+      <Button text="Logout" /> */
+}
+
+import Button from "./components/ui/Button.tsx";
+
+export default function App() {
+  return (
+    <>
+      <Button>Login</Button>
+      <Button>
+        <p>abc</p>
+      </Button>
+    </>
+  );
 }
