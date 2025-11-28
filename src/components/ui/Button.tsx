@@ -1,27 +1,29 @@
 {
-  /** 이벤트 핸들러에 매개변수로 데이터 전달하기
-  
-  이벤트 핸들러의 매개변수에 타입을 지정하고,
-  호출할 때 주의해야 할 점이 있다.
-  
-  아래의 경우에서 버튼 태그 내 속성으로 이벤트 종류를 결정한 후, 실행할 메서드를 전달할 때
-  
-  <button onClick={handleClick("Hello")}>클릭</button>
-
-  이런 식으로 작성하게 되면 이 handleClick은 클릭했을 때의 핸들러로써 작동하는 게 아니라 호출용으로 사용되기에 이 태그가 랜더링되는 동시에 함수가 실행되어버린다.
-  의도와 다르게 실행되는데, 이걸 방지하기 위해 매개변수를 전달하고 이용하고 싶다면 함수로 감싸진 형태를 이용해야 한다.
-
-  
-  
-  */
+  /** 이벤트 핸들러 추천 사용법
+   *
+   * 이벤트 핸들러를 정의하고, 이를 이벤트 props로 전달할 때 함수로 감싸야 한다고 알고 있다.
+   *
+   * 이 점을 활용해 아래와 같은 방법들이 있다.
+   * 1. 이벤트 속성 부분에 () =>로 감싸 바로 함수 내용 작성하기 (22라인)
+   * 2. 정의해둔 함수의 매개변수가 void인 경우에는 감싸지 않고 호출 가능 (23라인)
+   * 3. 단, 정의해둔 함수를 다시 () => 함수로 감싸면 ()를 붙여야 함. 만약 안붙이면 함수를 감싼 새로운 함수만 전달하는 거라 새로운 함수 내부에 들어있는 함수를 '실행한다'는 의미로 ()를 붙여줘야 함 (24라인)
+   *
+   * 가능한 한 핸들러 함수를 별도로 정의하고, 매개변수가 없다면 2번 방법을, 매개변수가 있다면 3번 방법을 활용하는 것을 추천
+   *
+   */
 }
 
 export default function Button() {
   const handleClick = (value: string) => alert(value);
+  const handleClick2 = () => alert("Hello");
 
   return (
     <>
-      <button onClick={() => handleClick("Hello")}>클릭</button>
+      <button onClick={() => alert("Hello")}>클릭</button>
+      <button onClick={handleClick2}>클릭2</button>
+      <button onClick={() => handleClick2()}>클릭2</button>
+
+      <button onClick={() => handleClick("world!")}>활용</button>
     </>
   );
 }
