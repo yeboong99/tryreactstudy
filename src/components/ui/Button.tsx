@@ -1,29 +1,32 @@
+import type React from "react";
+
 {
-  /** 이벤트 핸들러 추천 사용법
-   *
-   * 이벤트 핸들러를 정의하고, 이를 이벤트 props로 전달할 때 함수로 감싸야 한다고 알고 있다.
-   *
-   * 이 점을 활용해 아래와 같은 방법들이 있다.
-   * 1. 이벤트 속성 부분에 () =>로 감싸 바로 함수 내용 작성하기 (22라인)
-   * 2. 정의해둔 함수의 매개변수가 void인 경우에는 감싸지 않고 호출 가능 (23라인)
-   * 3. 단, 정의해둔 함수를 다시 () => 함수로 감싸면 ()를 붙여야 함. 만약 안붙이면 함수를 감싼 새로운 함수만 전달하는 거라 새로운 함수 내부에 들어있는 함수를 '실행한다'는 의미로 ()를 붙여줘야 함 (24라인)
-   *
-   * 가능한 한 핸들러 함수를 별도로 정의하고, 매개변수가 없다면 2번 방법을, 매개변수가 있다면 3번 방법을 활용하는 것을 추천
-   *
-   */
+  /** 
+   
+  props, children을 동시에 이용해보자.
+  
+  이벤트 핸들러에서 props를 읽어 사용하고,
+  내부에서 사용되는 버튼 태그의 컨텐츠를 전달받은 children을 사용한다. (사실 전달받은 컨텐츠 내용을 그대로 사용하도록 하는 거라 변화가 안보임)
+  
+  버튼은 사실 처음 렌더링될 때 컨텐츠를 가진 상태로 렌더링해야 하는 것이 일반적이므로, 컨텐츠를 작성하되, 둘 다 자식 컴포넌트에서 동시에 활용할 수 있다는 걸 알았다는 거에 만족하자.
+  
+  
+  
+*/
 }
 
-export default function Button() {
-  const handleClick = (value: string) => alert(value);
-  const handleClick2 = () => alert("Hello");
+export default function Button({
+  message,
+  children,
+}: {
+  message: string;
+  children: React.ReactNode;
+}) {
+  const handleClick = () => alert(message);
 
   return (
     <>
-      <button onClick={() => alert("Hello")}>클릭</button>
-      <button onClick={handleClick2}>클릭2</button>
-      <button onClick={() => handleClick2()}>클릭2</button>
-
-      <button onClick={() => handleClick("world!")}>활용</button>
+      <button onClick={handleClick}> {children} </button>
     </>
   );
 }
